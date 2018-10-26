@@ -43,16 +43,19 @@ public class FrmPrincipal extends javax.swing.JDialog
 
         BtnSelecao = new javax.swing.JToggleButton();
         txtCaminho = new javax.swing.JTextField();
-        rBubbleSort = new javax.swing.JRadioButton();
+        rQuickSort = new javax.swing.JRadioButton();
         rSelectionsort = new javax.swing.JRadioButton();
         rInsertonSort = new javax.swing.JRadioButton();
         BtnComparar = new javax.swing.JToggleButton();
         rRandonico = new javax.swing.JRadioButton();
         lblSelect = new javax.swing.JLabel();
         lblInset = new javax.swing.JLabel();
-        lblBubble = new javax.swing.JLabel();
+        lblQuickSort = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        lblBubble = new javax.swing.JLabel();
+        rBubbleSort = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,9 +68,23 @@ public class FrmPrincipal extends javax.swing.JDialog
             }
         });
 
-        rBubbleSort.setText("bubbleSort");
+        rQuickSort.setText("QuickSort");
+        rQuickSort.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rQuickSortActionPerformed(evt);
+            }
+        });
 
         rSelectionsort.setText("selectionsort");
+        rSelectionsort.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rSelectionsortActionPerformed(evt);
+            }
+        });
 
         rInsertonSort.setText("insertonsort");
 
@@ -86,7 +103,18 @@ public class FrmPrincipal extends javax.swing.JDialog
 
         lblInset.setText("Tempo de processamento");
 
+        lblQuickSort.setText("Tempo de processamento");
+
         lblBubble.setText("Tempo de processamento");
+
+        rBubbleSort.setText("bubbleSort");
+        rBubbleSort.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rBubbleSortActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,67 +122,72 @@ public class FrmPrincipal extends javax.swing.JDialog
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(rSelectionsort)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(lblSelect)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(rRandonico))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(BtnSelecao)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rInsertonSort)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblInset))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rBubbleSort)
-                                        .addGap(12, 12, 12)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblBubble)
-                                            .addComponent(BtnComparar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(117, 117, 117)
+                        .addComponent(rRandonico))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rSelectionsort)
+                        .addGap(12, 12, 12)
+                        .addComponent(lblSelect))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rBubbleSort)
+                        .addGap(24, 24, 24)
+                        .addComponent(lblBubble)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnSelecao))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(BtnComparar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rInsertonSort)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblInset))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rQuickSort)
+                        .addGap(29, 29, 29)
+                        .addComponent(lblQuickSort)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jSeparator1, jSeparator2});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtnSelecao)
-                            .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rSelectionsort)
-                            .addComponent(lblSelect)))
-                    .addComponent(rRandonico, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnSelecao)
+                    .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(rRandonico)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rSelectionsort)
+                    .addComponent(lblSelect))
+                .addGap(7, 7, 7)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rInsertonSort)
                     .addComponent(lblInset))
-                .addGap(22, 22, 22)
+                .addGap(4, 4, 4)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBubble)
                     .addComponent(rBubbleSort))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rQuickSort)
+                    .addComponent(lblQuickSort))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addComponent(BtnComparar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -197,24 +230,31 @@ public class FrmPrincipal extends javax.swing.JDialog
         int[] vet1 = vet;
         int[] vet2 = vet;
         int[] vet3 = vet;
+        int[] vet4 = vet;
 
         if (rSelectionsort.isSelected())
         {
             Ordena.selectionsort(vet1);
-            lblSelect.setText(Integer.toString((int) Ordena.temposelectionsort)
-                    + " milesegundos");
+            lblSelect.setText(Long.toString((long) Ordena.temposelectionsort)
+                    + " ms");
         }
         if (rBubbleSort.isSelected())
         {
             Ordena.bubbleSort(vet2);
-            lblBubble.setText(Integer.toString((int) Ordena.tempobubbleSort)
-                    + " milesegundos");
+            lblBubble.setText(Long.toString((long) Ordena.tempobubbleSort)
+                    + " ms");
         }
         if (rInsertonSort.isSelected())
         {
             Ordena.insertonsort(vet3);
-            lblInset.setText(Long.toString(Ordena.temposelectionsort)
-                    + " milesegundos");
+            lblInset.setText(Long.toString((long) Ordena.tempoinsertonsort)
+                    + " ms");
+        }
+        if (rQuickSort.isSelected())
+        {
+            Ordena.quickSort(vet4, 0, vet4.length-1);
+            lblQuickSort.setText(Long.toString((long) Ordena.tempoquickSort)
+                    + " ms");
         }
 
         if (rSelectionsort.isSelected() && rBubbleSort.isSelected())
@@ -222,15 +262,15 @@ public class FrmPrincipal extends javax.swing.JDialog
             if (Ordena.tempobubbleSort < Ordena.temposelectionsort)
             {
                 JOptionPane.showMessageDialog(null, "bubbleSort "
-                        + Ordena.tempobubbleSort + " milesegundos "
-                        + "\n selectionsort " + Ordena.temposelectionsort + " milesegundos "
+                        + Ordena.tempobubbleSort + " ms "
+                        + "\n selectionsort " + Ordena.temposelectionsort + " ms "
                         + "\n bubbleSort foi mais eficiente");
             }
             else
             {
                 JOptionPane.showMessageDialog(null, "bubbleSort "
-                        + Ordena.tempobubbleSort + " milesegundos "
-                        + "\n selectionsort " + Ordena.temposelectionsort + " milesegundos "
+                        + Ordena.tempobubbleSort + " ms "
+                        + "\n selectionsort " + Ordena.temposelectionsort + " ms "
                         + "\n selectionsort foi mais eficiente");
             }
         }
@@ -240,36 +280,51 @@ public class FrmPrincipal extends javax.swing.JDialog
             if (Ordena.tempoinsertonsort < Ordena.temposelectionsort)
             {
                 JOptionPane.showMessageDialog(null, " insertonsort "
-                        + Ordena.tempoinsertonsort + " milesegundos "
-                        + "\n selectionsort " + Ordena.temposelectionsort + " milesegundos "
+                        + Ordena.tempoinsertonsort + " ms "
+                        + "\n selectionsort " + Ordena.temposelectionsort + " ms "
                         + "\n insertonsort foi mais eficiente");
             }
             else
             {
                 JOptionPane.showMessageDialog(null, " insertonsort "
-                        + Ordena.tempoinsertonsort + " milesegundos "
-                        + "\n selectionsort " + Ordena.temposelectionsort + " milesegundos "
+                        + Ordena.tempoinsertonsort + " ms "
+                        + "\n selectionsort " + Ordena.temposelectionsort + " ms "
                         + "\n selectionsort foi mais eficiente");
             }
         }
-        if (rInsertonSort.isSelected() && rBubbleSort.isSelected())
+        if (rInsertonSort.isSelected() && rQuickSort.isSelected())
         {
             if (Ordena.tempobubbleSort < Ordena.tempoinsertonsort)
             {
                 JOptionPane.showMessageDialog(null, "bubbleSort "
-                        + Ordena.tempobubbleSort + " milesegundos "
-                        + "\n insertonsort " + Ordena.tempoinsertonsort + " milesegundos "
+                        + Ordena.tempobubbleSort + " ms "
+                        + "\n insertonsort " + Ordena.tempoinsertonsort + " ms "
                         + "\n bubbleSort foi mais eficiente");
             }
             else
             {
                 JOptionPane.showMessageDialog(null, "bubbleSort "
-                        + Ordena.tempobubbleSort + " milesegundos "
-                        + "\n insertonsort " + Ordena.tempoinsertonsort + " milesegundos "
+                        + Ordena.tempobubbleSort + " ms "
+                        + "\n insertonsort " + Ordena.tempoinsertonsort + " ms "
                         + "\n insertonsort foi mais eficiente");
             }
         }
     }//GEN-LAST:event_BtnCompararActionPerformed
+
+    private void rQuickSortActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rQuickSortActionPerformed
+    {//GEN-HEADEREND:event_rQuickSortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rQuickSortActionPerformed
+
+    private void rBubbleSortActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rBubbleSortActionPerformed
+    {//GEN-HEADEREND:event_rBubbleSortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBubbleSortActionPerformed
+
+    private void rSelectionsortActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rSelectionsortActionPerformed
+    {//GEN-HEADEREND:event_rSelectionsortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSelectionsortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,11 +389,14 @@ public class FrmPrincipal extends javax.swing.JDialog
     private javax.swing.JToggleButton BtnSelecao;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblBubble;
     private javax.swing.JLabel lblInset;
+    private javax.swing.JLabel lblQuickSort;
     private javax.swing.JLabel lblSelect;
     private javax.swing.JRadioButton rBubbleSort;
     private javax.swing.JRadioButton rInsertonSort;
+    private javax.swing.JRadioButton rQuickSort;
     private javax.swing.JRadioButton rRandonico;
     private javax.swing.JRadioButton rSelectionsort;
     private javax.swing.JTextField txtCaminho;

@@ -5,15 +5,12 @@ public class Ordenacao
 
     public String mensagem;
     public long tempoinsertonsort;
-    public int continsertonsort;
     public long temposelectionsort;
-    
     public long tempobubbleSort;
-    
+    public long tempoquickSort;
 
     public void insertonsort(int vet[])
     {
-        this.tempoinsertonsort = 0;
         long start = System.currentTimeMillis();
         for (int i = 1; i < vet.length; i++)
         {
@@ -26,13 +23,19 @@ public class Ordenacao
                 j -= 1;
             }
             vet[j] = aux;
-            this.continsertonsort++;
         }
-        this.tempoinsertonsort = (System.currentTimeMillis() - start);
-        /*for (int pos = 0; pos < vet.length; pos++)
+        long stop = System.currentTimeMillis();
+
+        this.tempoinsertonsort = (stop - start);
+
+        for (int pos = 0; pos < vet.length; pos++)
         {
             System.out.println(vet[pos]);
-        }*/
+        }
+        System.out.println(start);
+        System.out.println(stop);
+        System.out.println(stop - start);
+
     }
 
     public void selectionsort(int vet[])
@@ -79,11 +82,57 @@ public class Ordenacao
                 }
             }
         }
+        long stop = System.currentTimeMillis();
         this.tempobubbleSort = (System.currentTimeMillis() - start);
-        /* for (int pos = 0; pos < vet.length; pos++)
+        for (int pos = 0; pos < vet.length; pos++)
         {
             System.out.println(pos + 1 + " " + vet[pos]);
-        }*/
+        }
+        System.out.println(start);
+        System.out.println(stop);
+        System.out.println(stop - start);
+
+    }
+
+    public void quickSort(int[] vetor, int inicio, int fim)
+    {
+        long start = System.currentTimeMillis();
+        if (inicio < fim)
+        {
+            int posicaoPivo = separar(vetor, inicio, fim);
+            quickSort(vetor, inicio, posicaoPivo - 1);
+            quickSort(vetor, posicaoPivo + 1, fim);
+        }
+        long stop = System.currentTimeMillis();
+        this.tempoquickSort = (stop - start);
+    }
+
+    public int separar(int[] vetor, int inicio, int fim)
+    {
+        int pivo = vetor[inicio];
+        int i = inicio + 1, f = fim;
+        while (i <= f)
+        {
+            if (vetor[i] <= pivo)
+            {
+                i++;
+            }
+            else if (pivo < vetor[f])
+            {
+                f--;
+            }
+            else
+            {
+                int troca = vetor[i];
+                vetor[i] = vetor[f];
+                vetor[f] = troca;
+                i++;
+                f--;
+            }
+        }
+        vetor[inicio] = vetor[f];
+        vetor[f] = pivo;
+        return f;
     }
 
 }
